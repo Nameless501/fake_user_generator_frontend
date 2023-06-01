@@ -1,9 +1,6 @@
 import { useEffect } from 'react';
 
-function useIntersectionObserver(
-    target,
-    callback
-) {
+function useIntersectionObserver(target, callback) {
     useEffect(() => {
         const observer = new IntersectionObserver(callback);
 

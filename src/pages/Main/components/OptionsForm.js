@@ -1,28 +1,43 @@
-import {Form, Stack, Button, ButtonGroup} from 'react-bootstrap';
+import { Alert, Form, Stack } from 'react-bootstrap';
 import RegionInput from './RegionInput';
 import SeedInput from './SeedInput';
 import MistakesInput from './MistakesInput';
-import { AiOutlineCloudDownload } from 'react-icons/ai';
+import FormButtons from './FormButtons';
 
-function OptionsForm({ value, handleChange, handleSubmit, getRandomSeed, disabled, errors }) {
+function OptionsForm({
+    value,
+    handleChange,
+    handleSubmit,
+    handleFileDownload,
+    getRandomSeed,
+    isPending,
+    isDownloading,
+    formIsValid,
+    inputsErrors,
+    downloadError,
+}) {
     return (
         <Form className="px-4 py-4 bg-light" noValidate onSubmit={handleSubmit}>
             <Stack gap={4}>
                 <RegionInput handleChange={handleChange} />
-                <SeedInput value={value.seed} handleChange={handleChange} getRandomSeed={getRandomSeed} error={errors.seed} />
+                <SeedInput
+                    value={value.seed}
+                    handleChange={handleChange}
+                    getRandomSeed={getRandomSeed}
+                    error={inputsErrors.seed}
+                />
                 <MistakesInput
                     value={value.mistakes}
                     handleChange={handleChange}
-                    error={errors.mistakes}
+                    error={inputsErrors.mistakes}
                 />
-                <ButtonGroup className="col-8 col-md-4 offset-2">
-                    <Button variant={"success"} type="submit" disabled={disabled}>
-                        Get data
-                    </Button>
-                    <Button variant={"secondary"} className="px-md-0">
-                        <AiOutlineCloudDownload />
-                    </Button>
-                </ButtonGroup>
+                <FormButtons
+                    handleFileDownload={handleFileDownload}
+                    isPending={isPending}
+                    isDownloading={isDownloading}
+                    formIsValid={formIsValid}
+                    downloadError={downloadError}
+                />
             </Stack>
         </Form>
     );

@@ -17,12 +17,13 @@ function SeedInput({ value, handleChange, getRandomSeed, error }) {
                         onChange={handleChange}
                         isInvalid={!!error}
                     />
-                    <Button size="sm" onClick={getRandomSeed}>Random</Button>
+                    <Button size="sm" onClick={getRandomSeed}>
+                        Random
+                    </Button>
                     <Form.Control.Feedback type="invalid">
                         {error}
                     </Form.Control.Feedback>
                 </InputGroup>
-
             </Col>
         </Form.Group>
     );

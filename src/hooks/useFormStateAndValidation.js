@@ -1,18 +1,22 @@
 import { useState } from 'react';
 
-import { faker } from "@faker-js/faker";
+import { faker } from '@faker-js/faker';
 
-import {formValidationConfig, inputsErrorsConfig, inputsValidationConfig} from '../utils/configs';
+import {
+    formValidationConfig,
+    inputsErrorsConfig,
+    inputsValidationConfig,
+} from '../utils/configs';
 
 function useFormStateAndValidation(defaultValue) {
     const [inputsValue, setInputsValues] = useState(defaultValue);
 
-    const [errorMessages, setErrorMessages] = useState({});
+    const [inputsErrors, setInputsErrors] = useState({});
 
     const [formIsValid, setFormIsValid] = useState(true);
 
     function handleErrorMessage(name, message) {
-        setErrorMessages((current) => ({
+        setInputsErrors((current) => ({
             ...current,
             [name]: message,
         }));
@@ -24,11 +28,13 @@ function useFormStateAndValidation(defaultValue) {
     }
 
     function checkFormValidity(name, value) {
-        setFormIsValid(formValidationConfig.isValidSync({...inputsValue, [name]: value}));
+        setFormIsValid(
+            formValidationConfig.isValidSync({ ...inputsValue, [name]: value })
+        );
     }
 
     function setInputValue(name, value) {
-        setInputsValues(cur => ({
+        setInputsValues((cur) => ({
             ...cur,
             [name]: value,
         }));
@@ -40,7 +46,7 @@ function useFormStateAndValidation(defaultValue) {
             setInputValue(name, value);
             checkFormValidity(name, value);
             checkInputValidity(name, value);
-        } catch(err) {
+        } catch (err) {
             handleErrorMessage(name, inputsErrorsConfig[name]);
         }
     }
@@ -51,7 +57,7 @@ function useFormStateAndValidation(defaultValue) {
 
     return {
         inputsValue,
-        errorMessages,
+        inputsErrors,
         formIsValid,
         handleChange,
         getRandomSeed,

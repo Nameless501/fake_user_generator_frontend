@@ -1,23 +1,20 @@
-import { Alert, Form, Stack } from 'react-bootstrap';
+import { Form, Stack } from 'react-bootstrap';
 import RegionInput from './RegionInput';
 import SeedInput from './SeedInput';
 import MistakesInput from './MistakesInput';
-import FormButtons from './FormButtons';
+import FormButton from './FormButton';
 
 function OptionsForm({
     value,
     handleChange,
-    handleSubmit,
     handleFileDownload,
     getRandomSeed,
-    isPending,
     isDownloading,
-    formIsValid,
     inputsErrors,
     downloadError,
 }) {
     return (
-        <Form className="px-4 py-4 bg-light" noValidate onSubmit={handleSubmit}>
+        <Form className="px-4 py-4 bg-light" noValidate>
             <Stack gap={4}>
                 <RegionInput handleChange={handleChange} />
                 <SeedInput
@@ -31,11 +28,9 @@ function OptionsForm({
                     handleChange={handleChange}
                     error={inputsErrors.mistakes}
                 />
-                <FormButtons
+                <FormButton
                     handleFileDownload={handleFileDownload}
-                    isPending={isPending}
                     isDownloading={isDownloading}
-                    formIsValid={formIsValid}
                     downloadError={downloadError}
                 />
             </Stack>

@@ -1,4 +1,4 @@
-export const BASE_API_URL = 'https://task4api-production.up.railway.app';
+export const BASE_API_URL = 'https://task5api-production.up.railway.app';
 
 export const RANDOM_DATA_API_URL = BASE_API_URL + '/random';
 

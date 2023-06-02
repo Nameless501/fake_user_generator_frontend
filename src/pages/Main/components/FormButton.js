@@ -8,23 +8,14 @@ import {
 } from 'react-bootstrap';
 import { AiOutlineCloudDownload } from 'react-icons/ai';
 
-export const FormButtons = ({
-    isPending,
-    formIsValid,
+export const FormButton = ({
     handleFileDownload,
     isDownloading,
     downloadError,
 }) => {
     return (
         <Stack gap={2}>
-            <ButtonGroup className="col-8 col-md-4 offset-2">
-                <Button
-                    variant={'success'}
-                    type="submit"
-                    disabled={isPending || !formIsValid}
-                >
-                    Get data
-                </Button>
+            <ButtonGroup className="px-0 col-md-4">
                 <OverlayTrigger
                     placement="top"
                     overlay={<Tooltip>Download CSV</Tooltip>}
@@ -51,4 +42,4 @@ export const FormButtons = ({
     );
 };
 
-export default FormButtons;
+export default FormButton;

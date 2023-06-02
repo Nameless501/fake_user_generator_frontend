@@ -42,16 +42,11 @@ export const inputsValidationConfig = {
     seed: number()
         .nullable(true)
         .transform((_, val) => (val ? Number(val) : null)),
-    mistakes: number().min(0).max(1000).typeError('Required field'),
+    mistakes: number().min(0).max(1000).nullable(true)
+        .transform((_, val) => (val ? Number(val) : null)),
 };
 
 export const inputsErrorsConfig = {
     seed: SEED_INPUT_ERROR_MESSAGE,
     mistakes: MISTAKES_INPUT_ERROR_MESSAGE,
 };
-
-export const formValidationConfig = object({
-    locale: inputsValidationConfig.locale,
-    seed: inputsValidationConfig.seed,
-    mistakes: inputsValidationConfig.mistakes,
-});

@@ -15,12 +15,13 @@ import { initialFormValueConfig } from '../../utils/configs';
 function Main() {
     const tableEndRef = useRef();
 
+    const thunkControllerRef = useRef(null);
+
     const { data, status } = useSelector((state) => state.randomData);
 
     const {
         inputsValue,
         inputsErrors,
-        formIsValid,
         handleChange,
         getRandomSeed,
     } = useFormStateAndValidation(initialFormValueConfig);
@@ -35,15 +36,13 @@ function Main() {
         [dispatch]
     );
 
-    function handleSubmit(evt) {
-        evt.preventDefault();
-        dispatch(resetPageCounter());
-        dispatchFormData(inputsValue);
-    }
-
     useEffect(() => {
-        dispatchFormData(initialFormValueConfig);
-    }, [dispatchFormData]);
+        if(thunkControllerRef.current) {
+            thunkControllerRef.current?.abort();
+        }
+        dispatch(resetPageCounter());
+        thunkControllerRef.current = dispatchFormData(inputsValue);
+    }, [inputsValue, dispatch, dispatchFormData]);
 
     useIntersectionObserver(tableEndRef, ([{ isIntersecting }]) => {
         if (isIntersecting && status !== 'pending') {
@@ -58,11 +57,8 @@ function Main() {
                     <OptionsForm
                         value={inputsValue}
                         handleChange={handleChange}
-                        handleSubmit={handleSubmit}
                         getRandomSeed={getRandomSeed}
                         handleFileDownload={handleFileDownload}
-                        isPending={status === 'pending'}
-                        formIsValid={formIsValid}
                         isDownloading={isDownloading}
                         inputsErrors={inputsErrors}
                         downloadError={downloadError}
@@ -70,7 +66,7 @@ function Main() {
                     <DataTable data={data} />
                     <Container className="p-1 d-flex justify-content-center">
                         <Spinner>
-                            <span ref={tableEndRef} />
+                            <span ref={tableEndRef} className={status === 'pending' ? 'd-none' : ''} />
                         </Spinner>
                     </Container>
                 </Stack>

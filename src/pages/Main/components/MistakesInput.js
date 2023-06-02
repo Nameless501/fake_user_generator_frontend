@@ -12,6 +12,7 @@ function MistakesInput({ value, handleChange, error }) {
                     onChange={handleChange}
                     value={value}
                     isInvalid={!!error}
+                    placeholder={0}
                 />
                 <Form.Control.Feedback type="invalid">
                     {error}
@@ -22,8 +23,8 @@ function MistakesInput({ value, handleChange, error }) {
                     aria-describedby="mistakes-range"
                     name="mistakes"
                     min={0}
-                    max={1000}
-                    step={0.5}
+                    max={10}
+                    step={0.25}
                     onChange={handleChange}
                     value={value}
                 />

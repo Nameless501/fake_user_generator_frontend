@@ -3,7 +3,6 @@ import { useState } from 'react';
 import { faker } from '@faker-js/faker';
 
 import {
-    formValidationConfig,
     inputsErrorsConfig,
     inputsValidationConfig,
 } from '../utils/configs';
@@ -12,8 +11,6 @@ function useFormStateAndValidation(defaultValue) {
     const [inputsValue, setInputsValues] = useState(defaultValue);
 
     const [inputsErrors, setInputsErrors] = useState({});
-
-    const [formIsValid, setFormIsValid] = useState(true);
 
     function handleErrorMessage(name, message) {
         setInputsErrors((current) => ({
@@ -27,12 +24,6 @@ function useFormStateAndValidation(defaultValue) {
         handleErrorMessage(name, '');
     }
 
-    function checkFormValidity(name, value) {
-        setFormIsValid(
-            formValidationConfig.isValidSync({ ...inputsValue, [name]: value })
-        );
-    }
-
     function setInputValue(name, value) {
         setInputsValues((cur) => ({
             ...cur,
@@ -43,9 +34,8 @@ function useFormStateAndValidation(defaultValue) {
     function handleChange(evt) {
         const { name, value } = evt.target;
         try {
-            setInputValue(name, value);
-            checkFormValidity(name, value);
             checkInputValidity(name, value);
+            setInputValue(name, value);
         } catch (err) {
             handleErrorMessage(name, inputsErrorsConfig[name]);
         }
@@ -58,7 +48,6 @@ function useFormStateAndValidation(defaultValue) {
     return {
         inputsValue,
         inputsErrors,
-        formIsValid,
         handleChange,
         getRandomSeed,
     };

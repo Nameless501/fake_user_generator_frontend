@@ -34,7 +34,7 @@ function Main() {
 
     useEffect(() => {
         if (thunkControllerRef.current) {
-            thunkControllerRef.current?.abort('AbortError');
+            thunkControllerRef.current?.abort();
         }
         dispatch(resetPageCounter());
         thunkControllerRef.current = dispatchFormData(inputsValue);

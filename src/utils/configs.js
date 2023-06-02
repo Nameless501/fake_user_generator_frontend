@@ -42,7 +42,10 @@ export const inputsValidationConfig = {
     seed: number()
         .nullable(true)
         .transform((_, val) => (val ? Number(val) : null)),
-    mistakes: number().min(0).max(1000).nullable(true)
+    mistakes: number()
+        .min(0)
+        .max(1000)
+        .nullable(true)
         .transform((_, val) => (val ? Number(val) : null)),
 };
 

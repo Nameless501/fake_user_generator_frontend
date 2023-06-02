@@ -1,6 +1,6 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import axios from 'axios';
-import { RANDOM_DATA_API_URL } from '../../utils/constants';
+import { API_ERROR_MESSAGE, RANDOM_DATA_API_URL } from '../../utils/constants';
 
 export const getRandomData = createAsyncThunk(
     'randomData/getRandomData',
@@ -12,7 +12,7 @@ export const getRandomData = createAsyncThunk(
             });
             return response.data;
         } catch (err) {
-            return rejectWithValue(err.response.status);
+            return rejectWithValue(err);
         }
     }
 );
@@ -43,6 +43,9 @@ export const randomDataSlice = createSlice({
                 state.status = 'fulfilled';
             })
             .addCase(getRandomData.rejected, (state, { payload }) => {
+                if (payload) {
+                    state.error = API_ERROR_MESSAGE;
+                }
                 state.status = 'rejected';
             });
     },

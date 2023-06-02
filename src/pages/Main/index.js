@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useRef } from 'react';
-import { Stack, Container, Spinner } from 'react-bootstrap';
+import { Stack, Container, Spinner, Alert } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
 import useFormStateAndValidation from '../../hooks/useFormStateAndValidation';
 import {
@@ -17,14 +17,10 @@ function Main() {
 
     const thunkControllerRef = useRef(null);
 
-    const { data, status } = useSelector((state) => state.randomData);
+    const { data, status, error } = useSelector((state) => state.randomData);
 
-    const {
-        inputsValue,
-        inputsErrors,
-        handleChange,
-        getRandomSeed,
-    } = useFormStateAndValidation(initialFormValueConfig);
+    const { inputsValue, inputsErrors, handleChange, getRandomSeed } =
+        useFormStateAndValidation(initialFormValueConfig);
 
     const dispatch = useDispatch();
 
@@ -37,8 +33,8 @@ function Main() {
     );
 
     useEffect(() => {
-        if(thunkControllerRef.current) {
-            thunkControllerRef.current?.abort();
+        if (thunkControllerRef.current) {
+            thunkControllerRef.current?.abort('AbortError');
         }
         dispatch(resetPageCounter());
         thunkControllerRef.current = dispatchFormData(inputsValue);
@@ -64,11 +60,20 @@ function Main() {
                         downloadError={downloadError}
                     />
                     <DataTable data={data} />
-                    <Container className="p-1 d-flex justify-content-center">
-                        <Spinner>
-                            <span ref={tableEndRef} className={status === 'pending' ? 'd-none' : ''} />
-                        </Spinner>
-                    </Container>
+                    {status === 'rejected' && error ? (
+                        <Alert variant="danger">{error}</Alert>
+                    ) : (
+                        <Container className="p-1 d-flex justify-content-center">
+                            <Spinner>
+                                <span
+                                    ref={tableEndRef}
+                                    className={
+                                        status === 'pending' ? 'd-none' : ''
+                                    }
+                                />
+                            </Spinner>
+                        </Container>
+                    )}
                 </Stack>
             </Container>
         </Stack>

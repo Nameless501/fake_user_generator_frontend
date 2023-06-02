@@ -2,10 +2,7 @@ import { useState } from 'react';
 
 import { faker } from '@faker-js/faker';
 
-import {
-    inputsErrorsConfig,
-    inputsValidationConfig,
-} from '../utils/configs';
+import { inputsErrorsConfig, inputsValidationConfig } from '../utils/configs';
 
 function useFormStateAndValidation(defaultValue) {
     const [inputsValue, setInputsValues] = useState(defaultValue);

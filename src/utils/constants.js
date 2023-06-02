@@ -14,3 +14,5 @@ export const SEED_INPUT_ERROR_MESSAGE =
 export const MISTAKES_INPUT_ERROR_MESSAGE = 'Must be number from 0 to 1000';
 
 export const DOWNLOAD_ERROR_MESSAGE = 'Downloading file error. Try again later';
+
+export const API_ERROR_MESSAGE = 'Something went wrong. Try again later.';

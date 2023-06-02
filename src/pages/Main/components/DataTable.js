@@ -1,4 +1,4 @@
-import {Table} from 'react-bootstrap';
+import { Table } from 'react-bootstrap';
 import MemoizedTableRow from './TableRow';
 import { usersTableConfig } from '../../../utils/configs';
 

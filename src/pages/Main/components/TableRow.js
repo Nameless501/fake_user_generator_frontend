@@ -8,14 +8,19 @@ const MemoizedTableRow = memo(function TableRow({
     address,
     phone,
 }) {
+    const styles = {
+        wordWrap: 'break-word',
+        maxWidth: '150px',
+    };
+
     return (
         <tr>
             <td>{index}</td>
-            <td>{id}</td>
-            <td>{name}</td>
-            <td>{email}</td>
-            <td>{address}</td>
-            <td>{phone}</td>
+            <td style={styles}>{id}</td>
+            <td style={styles}>{name}</td>
+            <td style={styles}>{email}</td>
+            <td style={styles}>{address}</td>
+            <td style={styles}>{phone}</td>
         </tr>
     );
 });

@@ -12,7 +12,7 @@ export const getRandomData = createAsyncThunk(
             });
             return response.data;
         } catch (err) {
-            return rejectWithValue(err);
+            return rejectWithValue(err.code);
         }
     }
 );

@@ -11,6 +11,7 @@ import useFileDownload from '../../hooks/useFileDownload';
 import OptionsForm from './components/OptionsForm';
 import DataTable from './components/DataTable';
 import { initialFormValueConfig } from '../../utils/configs';
+import {faker} from "@faker-js/faker";
 
 function Main() {
     const tableEndRef = useRef();

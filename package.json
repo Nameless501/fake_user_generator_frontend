@@ -1,5 +1,5 @@
 {
-    "name": "task_4_frontend",
+    "name": "task_5_frontend",
     "version": "0.1.0",
     "private": true,
     "dependencies": {
@@ -48,5 +48,5 @@
         "gh-pages": "^5.0.0",
         "prettier": "^2.8.8"
     },
-    "homepage": "https://nameless501.github.io/task_4_frontend/"
+    "homepage": "https://nameless501.github.io/task_5_frontend/"
 }

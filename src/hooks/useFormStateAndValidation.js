@@ -1,8 +1,6 @@
 import { useState } from 'react';
-
-import { faker } from '@faker-js/faker';
-
 import { inputsErrorsConfig, inputsValidationConfig } from '../utils/configs';
+import {getRandomInt} from "../utils/utils";
 
 function useFormStateAndValidation(defaultValue) {
     const [inputsValue, setInputsValues] = useState(defaultValue);
@@ -39,7 +37,7 @@ function useFormStateAndValidation(defaultValue) {
     }
 
     function getRandomSeed() {
-        setInputValue('seed', faker.number.int());
+        setInputValue('seed', getRandomInt());
     }
 
     return {

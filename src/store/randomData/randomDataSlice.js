@@ -1,14 +1,15 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import axios from 'axios';
 import { API_ERROR_MESSAGE, RANDOM_DATA_API_URL } from '../../utils/constants';
+import {getRandomInt} from "../../utils/utils";
 
 export const getRandomData = createAsyncThunk(
     'randomData/getRandomData',
     async (payload, { rejectWithValue, getState }) => {
         try {
-            const { page } = getState().randomData;
+            const { page, sessionId } = getState().randomData;
             const response = await axios.get(RANDOM_DATA_API_URL, {
-                params: { ...payload, page },
+                params: { ...payload, page, sessionId },
             });
             return response.data;
         } catch (err) {
@@ -24,6 +25,7 @@ export const randomDataSlice = createSlice({
         status: 'idle',
         error: '',
         page: 1,
+        sessionId: getRandomInt(),
     },
     reducers: {
         resetPageCounter: (state) => {

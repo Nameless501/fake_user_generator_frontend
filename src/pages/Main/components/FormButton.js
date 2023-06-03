@@ -33,9 +33,9 @@ export const FormButton = ({
             {!!downloadError && (
                 <Alert
                     variant="danger"
-                    className="col-8 col-md-4 offset-2 my-0"
+                    className="col-md-4 p-2 mb-0"
                 >
-                    downloadError
+                    {downloadError}
                 </Alert>
             )}
         </Stack>

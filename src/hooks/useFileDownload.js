@@ -50,11 +50,11 @@ function useFileDownload() {
             .get(DOWNLOAD_TABLE_API_LINK)
             .then(initializeDownloading)
             .then(getFile)
-            .catch(() => setDownloadError(DOWNLOAD_ERROR_MESSAGE))
-            .finally(() => {
+            .then(() => {
                 clearLink();
                 setIsDownloading(false);
-            });
+            })
+            .catch(() => setDownloadError(DOWNLOAD_ERROR_MESSAGE));
     }
 
     return { handleFileDownload, isDownloading, downloadError };

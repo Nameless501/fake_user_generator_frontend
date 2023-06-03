@@ -7,12 +7,9 @@ export const getRandomData = createAsyncThunk(
     async (payload, { rejectWithValue, getState }) => {
         try {
             const { page } = getState().randomData;
-            const params = ``;
-            const response = await axios.get(RANDOM_DATA_API_URL,
-            //     {
-            //     params: { ...payload, page },
-            // }
-            );
+            const response = await axios.get(RANDOM_DATA_API_URL, {
+                params: { ...payload, page },
+            });
             return response.data;
         } catch (err) {
             return rejectWithValue(err.code);

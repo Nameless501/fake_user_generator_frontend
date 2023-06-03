@@ -31,10 +31,7 @@ export const FormButton = ({
                 </OverlayTrigger>
             </ButtonGroup>
             {!!downloadError && (
-                <Alert
-                    variant="danger"
-                    className="col-md-4 p-2 mb-0"
-                >
+                <Alert variant="danger" className="col-md-4 p-2 mb-0">
                     {downloadError}
                 </Alert>
             )}

@@ -1,6 +1,4 @@
-# <p align="center">Задание 5 (front-end)</p>
-
-[//]: # '<div align="center"><a href="https://task4frontend-production.up.railway.app">Ссылка на сайт</a></div>'
+# <p align="center">Генератор данных случайных пользователей (front-end)</p>
 
 ---
 
